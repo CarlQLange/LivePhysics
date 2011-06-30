@@ -19,7 +19,7 @@ public class LivePhysics implements EntryPoint {
     static World world;
     static DrawingManager dm;
     ArrayList<GameObject> objs = new ArrayList<GameObject>();
-    final int FRAMES_PER_SECOND = 35;
+    final int FRAMES_PER_SECOND = 60;
     static final int PTM_RATIO = 30;
     static int x, y, w, h;
 
@@ -55,7 +55,11 @@ public class LivePhysics implements EntryPoint {
                 }
                 dm.draw();
                 long newTime = new Date().getTime();
-                System.out.println(newTime - oldTime);
+                if ((1000 / (newTime - oldTime)) < 25) {
+                    Window.alert("Less than 24fps, with " + objs.size()
+                            + " blocks.");
+                }
+                // System.out.println(newTime - oldTime);
             }
 
         };
@@ -66,10 +70,10 @@ public class LivePhysics implements EntryPoint {
             @Override
             public void run() {
                 objs.add(new Block(Random.nextInt(Window.getClientWidth()), 0,
-                        10, 10, BodyType.DYNAMIC));
+                        1, 1, BodyType.DYNAMIC));
             }
         };
-        // t.scheduleRepeating(200);
+        t.scheduleRepeating(100);
     }
 
     private void setupWalls() {

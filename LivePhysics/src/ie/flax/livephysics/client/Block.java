@@ -9,7 +9,7 @@ public class Block extends PhysicsObject {
 
     public Block(float x, float y, int w, int h, BodyType t) {
         super(x, y, w, h, t);
-        // TODO Auto-generated constructor stub
+
     }
 
     @Override
@@ -20,15 +20,11 @@ public class Block extends PhysicsObject {
         context.rotate(body.getAngle());
         context.scale(LivePhysics.PTM_RATIO, LivePhysics.PTM_RATIO);
 
-        context.beginPath();
-        context.moveTo(0, 0);
         Vec2[] vec2 = shape.getVertices();
-        for (int q = 0; q < shape.getVertexCount(); q++) {
-            context.lineTo(vec2[q].x, vec2[q].y);
-        }
-        context.lineTo(vec2[0].x, vec2[0].y);
-        context.closePath();
-        context.fill();
+        context.fillRect(vec2[0].x - (1 / LivePhysics.PTM_RATIO), vec2[0].y
+                - (1 / LivePhysics.PTM_RATIO), vec2[2].x
+                + (2.0 / LivePhysics.PTM_RATIO), vec2[2].y
+                + (2.0 / LivePhysics.PTM_RATIO));
         context.restore();
     }
 

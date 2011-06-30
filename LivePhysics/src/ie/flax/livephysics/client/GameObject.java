@@ -9,7 +9,6 @@ public abstract class GameObject {
     public GameObject() {
         // add to draw list
         LivePhysics.dm.addToDrawList(this);
-        System.out.println("new block");
     }
 
     public abstract void draw(Context2d context);
